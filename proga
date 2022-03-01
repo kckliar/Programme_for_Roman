@@ -1,0 +1,73 @@
+# vir - выручка смены
+# zp - зарплата
+# udc - юдс
+# kolvo - колво смен
+# rg - ранг
+# perc_vir - процент выручки
+# perc_udc
+# perc_rg
+
+izn_vir = int(input('Введите выручку смены: '))
+perc_vir = int(input('Введите процент выполнения выручки: '))
+izn_udc = int(input('Введите сумму ЮДС: '))
+perc_udc = int(input('Введите процент ЮДС: '))
+kolvo = int(input('Введите количество смен: '))
+rg = int(input('Введите ранг (1 - новичок, 2 - продаван, 3 - консультант, 4 - мастер): '))
+
+
+vir_udc = izn_vir - izn_udc
+print('Выручка - ЮДС: ', vir_udc)
+if perc_vir >= 115:
+    koef_vir = 1.2
+elif (perc_vir >= 105) and (perc_vir < 115):
+    koef_vir = 1.1
+elif (perc_vir >= 100) and (perc_vir < 105):
+    koef_vir = 1
+elif perc_vir == 100:
+    koef_vir=  1
+elif perc_vir < 100:
+    koef_vir = 0.85
+print('Коэф выручки: ', koef_vir)
+
+if perc_udc >= 115:
+    koef_udc = 1.2
+elif (perc_udc >= 105) and (perc_udc < 115):
+    koef_udc = 1.1
+elif (perc_udc >= 100) and (perc_udc < 105):
+    koef_udc = 1
+elif perc_udc == 100:
+    koef_udc=  1
+elif perc_udc < 100:
+    koef_udc = 0.85
+print('Коэф ЮДС: ', koef_udc)
+
+if rg == 1:
+    perc_rg_vir = 0.05
+    perc_rg_udc = 0
+else:
+    if rg == 2:
+        perc_rg_vir = 0.04
+        perc_rg_udc = 0.07
+    else:
+        if rg == 3:
+            perc_rg_vir = 0.05
+            perc_rg_udc = 0.08
+        else:
+            if rg == 4:
+                perc_rg_vir = 0.06
+                perc_rg_udc = 0.08
+
+def viruchka(t):
+    k = t * koef_udc * perc_rg_vir
+    return k
+def udccc(w):
+    p = w * koef_udc * perc_rg_udc
+    return p
+smena = 1000 * kolvo
+
+summ = viruchka(vir_udc) + udccc(izn_udc) + smena
+
+print('Зарплата: ',summ)
+
+
+
